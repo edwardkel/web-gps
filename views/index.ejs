@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ubicación tiempo real</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link
+      rel="stylesheet"
+      href="/stylesheets/leaflet.css"
+
+    />
+    <link
+      rel="stylesheet"
+      href="/stylesheets/MarkerCluster.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/stylesheets/MarkerCluster.Default.css"
+    />
+  </head>
+  <body>
+    <div>
+      <h1>Ubicación tiempo real</h1>
+    </div>
+    <div id="map" style="height: 800px"></div>
+    <div id="location-data" style="display:none">
+      <h2>Location Data</h2>
+      <ul id="location-list"></ul>
+    </div>
+
+    <script  src="/javascripts/leaflet.min.js"></script>
+
+    <script  src="/javascripts/socket.io.min.js" ></script>
+
+    <script src="/javascripts/leaflet.markercluster-src.js"></script>
+
+    <script src="/javascripts/script.js"></script>
+    <script src="/javascripts/Jquery 3.7.1.js"></script>
+  </body>
+
+  <script type="application/javascript">
+
+    $( document ).ready(function() {
+      var control =  $(".leaflet-control-attribution");
+      control.css('display','none');
+    });
+
+
+  </script>
+</html>
