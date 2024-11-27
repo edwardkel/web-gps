@@ -239,14 +239,14 @@ const AgregarMarkers = () => {
           : null;
 
       if(distancia!=null){
-        //if(distancia<=100) {
+        if(distancia<=100) {
           L.marker([listavalores[i].lat, listavalores[i].lng],{icon: L.AwesomeMarkers.icon(listaiconos[i])}).addTo(map).bindPopup('Sodimac.sac.<br> <b style="color:#0078A8">  Av.javier prado 4057.</b>').on('click', (e) => {
                 console.log(e.latlng.lat);
               });
 
 
         //L.marker([listavalores[i].lat, listavalores[i].lng]).addTo(map).bindPopup('Sodimac.sac.<br>  Av.javier prado 4057.')
-        //}
+        }
       }
   }
 };
