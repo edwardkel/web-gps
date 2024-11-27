@@ -1,4 +1,4 @@
-import {__dirname} from "node/globals";
+//import {__dirname} from "node/globals";
 
 const express = require("express");
 const app = express();
