@@ -1,5 +1,7 @@
 const socket = io();
 
+
+
 let currentLocation = null;
 
 if (navigator.geolocation) {
@@ -11,6 +13,7 @@ if (navigator.geolocation) {
       socket.emit("send-location", { latitude, longitude });
     },
     (error) => {
+      toastr.warning('Debe otorgar permiso de ubicación en este sitio web, para el buen funcionamiento de la web.','Advertencia',{  positionClass:"toast-top-full-width",  preventDuplicates: true,   onclick: null, closeButton: false});
       console.log(error);
     },
     {
@@ -18,10 +21,12 @@ if (navigator.geolocation) {
       timeout: 5000,
       maximumAge: 0,
     }
+
   );
 }
 
 const map = L.map("map").setView([0, 0], 16);
+
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "Realtime Location by edward",
@@ -72,20 +77,21 @@ socket.on("receive-location", (data) => {
   console.log(`Received location for ${id}: ${latitude}, ${longitude}`);
   map.setView([latitude, longitude]);
 /*
-  //AgregarMarkers();
-debugger;
-  //const [newLat, newLng] = addOffset(latitude, longitude);
-  if (markers[id]) {
-    markers[id].setLatLng([newLat, newLng]);
-  } else {
-    markers[id] = L.marker([newLat, newLng]).addTo(markerClusterGroup);
+      //AgregarMarkers();
+    debugger;
+      //const [newLat, newLng] = addOffset(latitude, longitude);
+      if (markers[id]) {
+        markers[id].setLatLng([newLat, newLng]);
+      } else {
+        markers[id] = L.marker([newLat, newLng]).addTo(markerClusterGroup);
 
-  }
+      }
   */
-  updateLocationList(id, latitude, longitude);
+
+  //updateLocationList(id, latitude, longitude);
 
 
-debugger;
+//debugger;
   map.setView([latitude, longitude]);
   AgregarMarkers();
   const [newLat, newLng] = addOffset(latitude, longitude);
@@ -159,7 +165,7 @@ const AgregarMarkers = () => {
     lng: "asdasd"
   }
 
-  debugger;
+  //debugger;
   const listavalores=[
     {lat :"-12.08510725735431",lng:"-77.03013562331508"     },
     {lat :"-12.084590635246911",lng:"-77.03018944459626"     },
@@ -189,8 +195,9 @@ const AgregarMarkers = () => {
   */
 
 
+
   map.eachLayer(function (layer) {
-    debugger;
+    //debugger;
     var nombre=layer._leaflet_id;
 
      if( layer._leaflet_id!=25 && layer._leaflet_id!=42 && layer._leaflet_id!=43 && layer._leaflet_id!= 44){
@@ -199,6 +206,28 @@ const AgregarMarkers = () => {
 
   });
 
+  /*
+  var markericon1 = L.AwesomeMarkers.icon({ icon: 'arrow-right', markerColor: 'blue',   prefix: 'fa',   spin:false  });
+  var markericon2 = L.AwesomeMarkers.icon({ icon: 'group', markerColor: 'darkblue',   prefix: 'fa',   spin:false  });
+  var markericon3 = L.AwesomeMarkers.icon({ icon: 'user', markerColor: '#f28f82',   prefix: 'fa',   spin:true  });
+  var markericon4 = L.AwesomeMarkers.icon({ icon: 'ambulance', markerColor: 'darkgreen',   prefix: 'fa',   spin:false  });
+  var markericon5 = L.AwesomeMarkers.icon({ icon: 'glass', markerColor: 'purple',   prefix: 'fa',   spin:false  });
+  var markericon6 = L.AwesomeMarkers.icon({ icon: 'shopping-cart', markerColor: 'blue',   prefix: 'fa',   spin:false  });
+  var markericon7 = L.AwesomeMarkers.icon({ icon: 'medkit', markerColor: 'darkblue',   prefix: 'fa',   spin:false  });
+  var markericon8 = L.AwesomeMarkers.icon({ icon: 'star', markerColor: 'orange',   prefix: 'fa',   spin:false  });
+
+  */
+  const listaiconos=[
+    { icon: 'arrow-right', markerColor: 'blue',   prefix: 'fa',   spin:false  },
+    { icon: 'group', markerColor: 'darkblue',   prefix: 'fa',   spin:false  },
+    { icon: 'user', markerColor: '#f28f82',   prefix: 'fa',   spin:false  },
+    { icon: 'ambulance', markerColor: 'darkgreen',   prefix: 'fa',   spin:false  },
+    { icon: 'glass', markerColor: 'purple',   prefix: 'fa',   spin:false  },
+    { icon: 'shopping-cart', markerColor: 'blue',   prefix: 'fa',   spin:false  },
+    { icon: 'medkit', markerColor: 'darkblue',   prefix: 'fa',   spin:false  },
+    { icon: 'star', markerColor: 'orange',   prefix: 'fa',   spin:false  }
+
+      ]
     for (let i in listavalores) {
       distancia = currentLocation
           ? calculateDistance(
@@ -210,9 +239,14 @@ const AgregarMarkers = () => {
           : null;
 
       if(distancia!=null){
-        if(distancia<=100) {
-          L.marker([listavalores[i].lat, listavalores[i].lng]).addTo(map);
-        }
+        //if(distancia<=100) {
+          L.marker([listavalores[i].lat, listavalores[i].lng],{icon: L.AwesomeMarkers.icon(listaiconos[i])}).addTo(map).bindPopup('Sodimac.sac.<br> <b style="color:#0078A8">  Av.javier prado 4057.</b>').on('click', (e) => {
+                console.log(e.latlng.lat);
+              });
+
+
+        //L.marker([listavalores[i].lat, listavalores[i].lng]).addTo(map).bindPopup('Sodimac.sac.<br>  Av.javier prado 4057.')
+        //}
       }
   }
 };

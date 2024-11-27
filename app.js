@@ -1,3 +1,5 @@
+import {__dirname} from "node/globals";
+
 const express = require("express");
 const app = express();
 const http = require("http");
@@ -23,6 +25,8 @@ io.on("connection", function (socket) {
     io.emit("user-disconnected", socket.id);
   });
 });
+
+//app.use(express.static(path.join(__dirname, 'public')));
 
 app.get("/", function (req, res) {
   res.render("index");

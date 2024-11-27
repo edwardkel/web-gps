@@ -5,19 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ubicación tiempo real</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link
-      rel="stylesheet"
-      href="/stylesheets/leaflet.css"
 
-    />
-    <link
-      rel="stylesheet"
-      href="/stylesheets/MarkerCluster.css"
-    />
-    <link
-      rel="stylesheet"
-      href="/stylesheets/MarkerCluster.Default.css"
-    />
+     <link  rel="stylesheet"  href="/stylesheets/leaflet.css" />
+     <link  rel="stylesheet"  href="/stylesheets/MarkerCluster.css" />
+     <link  rel="stylesheet"  href="/stylesheets/MarkerCluster.Default.css" />
+     <link  rel="stylesheet"  href="/stylesheets/leaflet.awesome-markers.css" />
+     <link  rel="stylesheet"  href="/stylesheets/font-awesome.css"  />
+    <link  rel="stylesheet"   href="/stylesheets/toastr.css" rel="stylesheet" />
+
+
   </head>
   <body>
     <div>
@@ -29,14 +25,16 @@
       <ul id="location-list"></ul>
     </div>
 
+
     <script  src="/javascripts/leaflet.min.js"></script>
-
     <script  src="/javascripts/socket.io.min.js" ></script>
-
     <script src="/javascripts/leaflet.markercluster-src.js"></script>
-
-    <script src="/javascripts/script.js"></script>
+    <script src="/javascripts/leaflet.awesome-markers.js"></script>
     <script src="/javascripts/Jquery 3.7.1.js"></script>
+    <script src="/javascripts/toastr.min.js"></script>
+    <script src="/javascripts/script.js"></script>
+
+
   </body>
 
   <script type="application/javascript">
@@ -44,8 +42,9 @@
     $( document ).ready(function() {
       var control =  $(".leaflet-control-attribution");
       control.css('display','none');
-    });
 
+
+    });
 
   </script>
 </html>
