@@ -4,9 +4,6 @@ const socket = io();
 
 let currentLocation = null;
 
-function uncionSiTodoVaBien() {
-
-}
 
 if (navigator.geolocation) {
   navigator.geolocation.watchPosition(
@@ -27,23 +24,7 @@ if (navigator.geolocation) {
     }
 
   );
-  navigator.geolocation.getCurrentPosition( uncionSiTodoVaBien, function(error){
-// El segundo parámetro es la función de error
-    switch(error.code) {
-      case error.PERMISSION_DENIED:
-        // El usuario denegó el permiso para la Geolocalización.
-        toastr.warning('Debe otorgar permiso de ubicación en este sitio web, para el buen funcionamiento de la web.','Advertencia',{  positionClass:"toast-top-full-width",  preventDuplicates: true,   onclick: null, closeButton: false});
-        break;
-      case error.POSITION_UNAVAILABLE:
-        // La ubicación no está disponible.
-        break;
-      case error.TIMEOUT:
-        // Se ha excedido el tiempo para obtener la ubicación.
-        break;
-      case error.UNKNOWN_ERROR:
-        // Un error desconocido.
-        break;
-    }}  );
+
 }
 
 const map = L.map("map").setView([0, 0], 16);
