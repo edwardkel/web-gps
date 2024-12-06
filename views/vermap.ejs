@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ubicación tiempo real</title>
+    <title>Mapa tiempo real</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
 
      <link  rel="stylesheet"  href="/stylesheets/leaflet.css" />
@@ -17,7 +17,7 @@
   </head>
   <body>
     <div>
-      <h1>Ubicación tiempo real</h1>
+      <h1>Mapa tiempo real</h1>
     </div>
     <div id="map" style="height: 800px"></div>
     <div id="location-data" style="display:none">
@@ -31,7 +31,7 @@
     <script src="/javascripts/leaflet.awesome-markers.js"></script>
     <script src="/javascripts/jquery3.7.1.js"></script>
     <script src="/javascripts/toastr.min.js"></script>
-    <script src="/javascripts/script.js"></script>
+    <script src="/javascripts/script-map.js"></script>
 
 
   </body>
@@ -44,8 +44,6 @@
 
       var queries = {};
 
-
-
     if(document.location.search.length>0) {
       $.each(document.location.search.substr(1).split('&'), function (c, q) {
         var i = q.split('=');
@@ -53,10 +51,10 @@
       });
 
       localStorage.setItem("codigo",queries["pers_id"]);
-
+      
       //console.log(Object.keys(queries).length);
       var arrcust=[];
-
+/*
       $.ajax({
         url: "/getlistado",
         type:'POST',
@@ -88,7 +86,7 @@
           }
         }
       });
-
+*/
     }else{
       toastr.info('no se encontraron los parametros en la url de la web.','Error',{  positionClass:"toast-top-full-width",  preventDuplicates: true,   onclick: null, closeButton: false});
     }

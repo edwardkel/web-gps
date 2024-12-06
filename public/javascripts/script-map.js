@@ -4,6 +4,11 @@ let currentLocation = null;
 
 var isswpop=true;
 
+socket.on('connect', function() {
+  console.log('Conectado al servidor');
+});
+
+/*
 if (navigator.geolocation) {
   navigator.geolocation.watchPosition(
     (position) => {
@@ -23,7 +28,13 @@ if (navigator.geolocation) {
 
   );
 }
-
+*/
+/*
+socket.on('connection', function() {
+  console.log('Conectado al servidor');
+});
+*/
+//socket.emit("send-location", { -12.08510725735431, -77.03013562331508  });
 const map = L.map("map").setView([0, 0], 16);
 
 
@@ -72,6 +83,8 @@ const updateLocationList = (id, latitude, longitude, distance = null) => {
 };
 
 socket.on("receive-location", (data) => {
+
+  //debugger;
   const { id, latitude, longitude } = data;
   //console.log(`Received location for ${id}: ${latitude}, ${longitude}`);
 
@@ -79,20 +92,66 @@ socket.on("receive-location", (data) => {
 
   }else{
 
-    //emitir ubicacion
+    //debugger;
 
-        var cod =localStorage.getItem("codigo");
+    /*
+          //AgregarMarkers();
+        debugger;
+          //const [newLat, newLng] = addOffset(latitude, longitude);
+          if (markers[id]) {
+            markers[id].setLatLng([newLat, newLng]);
+          } else {
+            markers[id] = L.marker([newLat, newLng]).addTo(markerClusterGroup);
 
-        socket.emit('refreshlocation', {
-          latitude: latitude,
-          longitude: longitude,
-          id:    cod
-        }, function(resp) {
-          //console.log('respuesta server: ', resp);
-        });
+          }
+      */
+
+    //updateLocationList(id, latitude, longitude);
+/*
+    map.setView([latitude, longitude]);
+    //AgregarMarkers();
+    const [newLat, newLng] = addOffset(latitude, longitude);
+
+    markers[id]= L.marker([newLat, newLng]).addTo(map);
+    markers[id].setLatLng([newLat, newLng]);
 
 
-  map.setView([latitude, longitude]);
+ */
+
+  }
+
+});
+socket.on("refreshlocation", (data) => {
+  //socket.on("refreshlocation0008", (data) => {
+
+  debugger;
+
+  const { id, latitude, longitude } = data;
+
+
+  var codper=localStorage.getItem("codigo");
+
+  console.log('entro '+codper + ' data id ' + id);
+  //console.log(`Received location for ${id}: ${latitude}, ${longitude}`);
+
+  if (!isswpop) {
+
+  }else{
+
+//emitir ubicacion
+/*
+    var cod =localStorage.getItem("codigo");
+
+    socket.emit('refreshlocation', {
+      usuario: 'Fernando',
+      mensaje: 'Hola Mundo',
+      codigo:    cod
+    }, function(resp) {
+      //console.log('respuesta server: ', resp);
+    });
+    */
+
+  //map.setView([latitude, longitude]);
   /*
         //AgregarMarkers();
       debugger;
@@ -107,14 +166,26 @@ socket.on("receive-location", (data) => {
 
     //updateLocationList(id, latitude, longitude);
 
-    map.setView([latitude, longitude]);
-    AgregarMarkers();
-    const [newLat, newLng] = addOffset(latitude, longitude);
+    if(codper==id) {
+      map.eachLayer(function (layer) {
 
-    markers[id]= L.marker([newLat, newLng]).addTo(map);
-    markers[id].setLatLng([newLat, newLng]);
+        var nombre = layer._leaflet_id;
+
+        if (layer._leaflet_id != 25 && layer._leaflet_id != 42 && layer._leaflet_id != 43 && layer._leaflet_id != 44) {
+          map.removeLayer(layer);
+        }
+
+      });
 
 
+      map.setView([latitude, longitude]);
+      //AgregarMarkers();
+      const [newLat, newLng] = addOffset(latitude, longitude);
+
+      markers[id] = L.marker([newLat, newLng]).addTo(map);
+      markers[id].setLatLng([newLat, newLng]);
+
+    }
   }
 
 });
