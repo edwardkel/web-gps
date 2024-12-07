@@ -81,12 +81,18 @@ socket.on("receive-location", (data) => {
 
     //emitir ubicacion
 
-        var cod =localStorage.getItem("codigo");
+      var cod =sessionStorage.getItem("codigo");
+      var cia=sessionStorage.getItem("cia");
+      var fdoc=sessionStorage.getItem("fdoc");
+      var cbd=sessionStorage.getItem("cbd");
 
         socket.emit('refreshlocation', {
           latitude: latitude,
           longitude: longitude,
-          id:    cod
+          id:    cod,
+          cia:    cia,
+          fdoc :    fdoc,
+          cbd:    cbd
         }, function(resp) {
           //console.log('respuesta server: ', resp);
         });
@@ -213,10 +219,10 @@ const AgregarMarkers = () => {
 
       ]
 
-  if(localStorage.getItem("lscliente")==null){
+  if(sessionStorage.getItem("lscliente")==null){
     console.log('error al obtener datos de cliente')
   }else{
-    var datacliente = JSON.parse(localStorage.getItem("lscliente"));
+    var datacliente = JSON.parse(sessionStorage.getItem("lscliente"));
 
     var listadocli=[];
 

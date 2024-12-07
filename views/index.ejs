@@ -52,7 +52,10 @@
         queries[i[0].toString()] = i[1].toString();
       });
 
-      localStorage.setItem("codigo",queries["pers_id"]);
+      sessionStorage.setItem("codigo",queries["pers_id"]);
+      sessionStorage.setItem("cia",queries["cia"]);
+      sessionStorage.setItem("fdoc",queries["fdoc"]);
+      sessionStorage.setItem("cbd",queries["c_bd"]);
 
       //console.log(Object.keys(queries).length);
       var arrcust=[];
@@ -77,7 +80,7 @@
               arrcust.push(field);
             });
 
-            localStorage.setItem("lscliente",JSON.stringify(arrcust));
+            sessionStorage.setItem("lscliente",JSON.stringify(arrcust));
           }else{
             toastr.info('no se encontráron datos.','Aviso',{  positionClass:"toast-top-full-width",  preventDuplicates: true,   onclick: null, closeButton: false});
           }

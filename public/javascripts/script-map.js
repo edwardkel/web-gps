@@ -124,14 +124,18 @@ socket.on("receive-location", (data) => {
 socket.on("refreshlocation", (data) => {
   //socket.on("refreshlocation0008", (data) => {
 
-  debugger;
+  //debugger;
 
-  const { id, latitude, longitude } = data;
+  const { id, latitude, longitude,cia,fdoc,cbd } = data;
 
 
-  var codper=localStorage.getItem("codigo");
+  var pcodper=sessionStorage.getItem("codigo");
+  var pcia=sessionStorage.getItem("cia");
+  var pfdoc=sessionStorage.getItem("fdoc");
+  var pcbd=sessionStorage.getItem("cbd");
 
-  console.log('entro '+codper + ' data id ' + id);
+
+  console.log('pers_id '+id + 'cia '+ cia+'fdoc '+fdoc +' cbd '+cbd+   ' data session ' + pcodper + ' ' + pcia +' ' +pfdoc+ ' ' +pcbd);
   //console.log(`Received location for ${id}: ${latitude}, ${longitude}`);
 
   if (!isswpop) {
@@ -166,7 +170,9 @@ socket.on("refreshlocation", (data) => {
 
     //updateLocationList(id, latitude, longitude);
 
-    if(codper==id) {
+
+    if(pcodper==id && pcia==cia && pfdoc==fdoc && pcbd==cbd) {
+      console.log('entra');
       map.eachLayer(function (layer) {
 
         var nombre = layer._leaflet_id;
@@ -186,6 +192,7 @@ socket.on("refreshlocation", (data) => {
       markers[id].setLatLng([newLat, newLng]);
 
     }
+
   }
 
 });
@@ -284,10 +291,10 @@ const AgregarMarkers = () => {
 
       ]
 
-  if(localStorage.getItem("lscliente")==null){
+  if(sessionStorage.getItem("lscliente")==null){
     console.log('error al obtener datos de cliente')
   }else{
-    var datacliente = JSON.parse(localStorage.getItem("lscliente"));
+    var datacliente = JSON.parse(sessionStorage.getItem("lscliente"));
 
     var listadocli=[];
 

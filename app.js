@@ -63,6 +63,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 io.on("connection", function (socket) {
   console.log(`User connected: ${socket.id}`);
+
   socket.on("send-location", function (data) {
     console.log(
       `Location received from ${socket.id}: ${data.latitude}, ${data.longitude}`
@@ -78,7 +79,7 @@ io.on("connection", function (socket) {
   // Escuchar el cliente
   socket.on('refreshlocation', (data, callback) => {
 
-    //console.log(data);
+    console.log(data);
 
     //console.log('refreshlocation'+data.id);
 
